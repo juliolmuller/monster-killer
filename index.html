@@ -33,18 +33,20 @@
       </div>
 
       <!-- Painel com resultado -->
-      <div class="panel result">
-        <div class="lose">Você perdeu! :(</div>
-        <div class="win">Você ganhou!!! :)</div>
+      <div class="panel result" v-if="gameOver">
+        <div class="win" v-if="won">Você ganhou!!! :)</div>
+        <div class="lose" v-else>Você perdeu! :(</div>
       </div>
 
       <!-- Painel de menu -->
       <div class="panel buttons">
-        <button class="btn attack">Ataque</button>
-        <button class="btn especial-attack">Ataque Especial</button>
-        <button class="btn heal">Curar</button>
-        <button class="btn give-up">Desistir</button>
-        <button class="btn new-game">Iniciar Jogo</button>
+        <template v-if="!gameStopped">
+          <button class="btn attack" @click="attack()">Ataque</button>
+          <button class="btn especial-attack" @click="attack(true)">Ataque Especial</button>
+          <button class="btn heal" @click="heal">Curar</button>
+          <button class="btn give-up" @click="giveup">Desistir</button>
+        </template>
+        <button class="btn new-game" v-else @click="start">Iniciar Jogo</button>
       </div>
 
       <!-- Painel de logs -->
