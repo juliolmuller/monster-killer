@@ -8,6 +8,10 @@ new Vue({
       playerLife: 100,
       monsterLife: 100,
       logs: [],
+      names: {
+        player: 'Jogador',
+        monster: 'Monstro',
+      },
     }
   },
 
@@ -21,29 +25,33 @@ new Vue({
   },
 
   watch: {
+    gameOver(value) {
+      this.gameStopped = value
+    },
     playerLife(value) {
       if (value  <= 0) {
-        this.playerLife = 0
-        this.gameStopped = true
+        value = 0
       } else if (value > 100) {
-        this.playerLife = 100
+        value = 100
       }
+      this.playerLife = value
     },
     monsterLife(value) {
-      if (value  <= 0) {
-        this.monsterLife = 0
-        this.gameStopped = true
-      }else if (value > 100) {
-        this.monsterLife = 100
+      if (value  < 0) {
+        value = 0
+      } else if (value > 100) {
+        value = 100
       }
+      this.monsterLife = value
     },
   },
 
   methods: {
     start() {
-      this.gameStopped = false
+      this.logs = []
       this.playerLife = 100
       this.monsterLife = 100
+      this.gameStopped = false
     },
     getRandom(min, max) {
       return Math.floor(Math.random() * (max - min)) + min
@@ -60,18 +68,33 @@ new Vue({
     monsterHit() {
       return this.getRandom(3, 8)
     },
+    log(who, type, hit) {
+      const enemy = Object.keys(this.names).filter(k => k !== who)[0]
+      this.logs.push({
+        class: who,
+        text: type === 'heal'
+          ? `O ${this.names[who]} recuperou ${hit}`
+          : `O ${this.names[who]} atingiu o ${this.names[enemy]} com ${hit}`
+      })
+    },
     mosnterAttack() {
       if (this.monsterLife) {
+        const playerLife = this.playerLife
         this.playerLife -= this.monsterHit()
+        this.log('monster', 'hurt', playerLife - this.playerLife)
       }
     },
     attack(especial = false) {
+      const monsterLife = this.monsterLife
       this.monsterLife -= especial ? this.especialHit() : this.hit()
+      this.log('player', 'hurt', monsterLife - this.monsterLife)
       this.mosnterAttack()
     },
     heal() {
+      const playerLife = this.playerLife
       this.playerLife += this.health()
-      this.playerLife -= this.monsterHit()
+      this.log('player', 'heal', this.playerLife - playerLife)
+      this.mosnterAttack()
     },
     giveup() {
       this.gameStopped = true

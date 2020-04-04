@@ -50,14 +50,9 @@
       </div>
 
       <!-- Painel de logs -->
-      <div class="panel logs">
+      <div class="panel logs" v-if="logs.length">
         <ul>
-          <li class="log player">Jogador atingiu Monstro com 5</li>
-          <li class="log monster">Monstro atingiu jJogador com 6</li>
-          <li class="log player">Jogador atingiu Monstro com 7</li>
-          <li class="log monster">Monstro atingiu jJogador com 4</li>
-          <li class="log player">Jogador ganhou força de 3</li>
-          <li class="log monster">Monstro atingiu jJogador com 9</li>
+          <li v-for="log in logs" :class="`log ${log.class}`">{{  log.text }}</li>
         </ul>
       </div>
     </div>
