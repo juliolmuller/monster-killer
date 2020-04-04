@@ -19,16 +19,16 @@
         <div class="score">
           <h1>Jogador</h1>
           <div class="life-bar">
-            <div class="life danger" style="width: 20%;"></div>
+            <div class="life" :class="{ danger: playerLife < 25 }" :style="{ width: `${playerLife}%` }"></div>
           </div>
-          <div>15%</div>
+          <div>{{ playerLife }}%</div>
         </div>
         <div class="score">
           <h1>Monstro</h1>
           <div class="life-bar">
-            <div class="life" style="width: 30%;"></div>
+            <div class="life" :class="{ danger: monsterLife < 25 }" :style="{ width: `${monsterLife}%` }"></div>
           </div>
-          <div>30%</div>
+          <div>{{ monsterLife }}%</div>
         </div>
       </div>
 

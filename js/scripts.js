@@ -7,6 +7,8 @@ new Vue({
       gameStopped: true,
       gameOver: false,
       won: false,
+      playerLife: 100,
+      monsterLife: 100,
       logs: [],
     }
   },
@@ -21,6 +23,8 @@ new Vue({
     start() {
       this.gameStopped = false
       this.gameOver = false
+      this.playerLife = 100
+      this.monsterLife = 100
     },
     attack(especial = false) {
       console.log(`"${especial ? 'especial ' : ''}attack" triggered`)
