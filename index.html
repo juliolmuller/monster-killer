@@ -6,13 +6,58 @@
     <title>
       Monster Killer Game
     </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" />
     <link rel="stylesheet" href="css/styles.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script defer src="js/scripts.js"></script>
   </head>
   <body>
     <div id="app">
-      <h1>{{ hello }}</h1>
+
+      <!-- Painel de vidas -->
+      <div class="panel scores">
+        <div class="score">
+          <h1>Jogador</h1>
+          <div class="life-bar">
+            <div class="life danger" style="width: 20%;"></div>
+          </div>
+          <div>15%</div>
+        </div>
+        <div class="score">
+          <h1>Monstro</h1>
+          <div class="life-bar">
+            <div class="life" style="width: 30%;"></div>
+          </div>
+          <div>30%</div>
+        </div>
+      </div>
+
+      <!-- Painel com resultado -->
+      <div class="panel result">
+        <div class="lose">Você perdeu! :(</div>
+        <div class="win">Você ganhou!!! :)</div>
+      </div>
+
+      <!-- Painel de menu -->
+      <div class="panel buttons">
+        <button class="btn attack">Ataque</button>
+        <button class="btn especial-attack">Ataque Especial</button>
+        <button class="btn heal">Curar</button>
+        <button class="btn give-up">Desistir</button>
+        <button class="btn new-game">Iniciar Jogo</button>
+      </div>
+
+      <!-- Painel de logs -->
+      <div class="panel logs">
+        <ul>
+          <li class="log player">Jogador atingiu Monstro com 5</li>
+          <li class="log monster">Monstro atingiu jJogador com 6</li>
+          <li class="log player">Jogador atingiu Monstro com 7</li>
+          <li class="log monster">Monstro atingiu jJogador com 4</li>
+          <li class="log player">Jogador ganhou força de 3</li>
+          <li class="log monster">Monstro atingiu jJogador com 9</li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
